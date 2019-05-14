@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Question
+from django.template import loader
 
 
 def detail(request, questionId):
@@ -14,6 +15,9 @@ def vote(request, questionId):
     return HttpResponse("You are voting on question %s." %questionId)
 
 def index(request):
-    latestQuetionList = Question.objects.order_by('ubDate')[:5]
-    output = ', '.join([q.questionText for q in latestQuetionList])
-    return  HttpResponse(output)
+    latestQuetionList = Question.objects.order_by('pubDate')[:5]
+    template = loader.get_template('polls/index.html')
+    context = {
+        'latestQuestionList': latestQuetionList
+    }
+    return  HttpResponse(template.render(context, request))
