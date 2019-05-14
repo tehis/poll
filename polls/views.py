@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Question
 from django.template import loader
@@ -7,7 +7,8 @@ from django.http import Http404
 
 def detail(request, questionId):
     try:
-        question = Question.objects.get(pk=questionId)
+        # question = Question.objects.get(pk=questionId)
+        question = get_object_or_404(Question, pk=questionId)
     except Question.DoesNotExist:
         raise Http404("Question does not exists")
     return render(request, 'polls/detail.html', {'question' : question})
