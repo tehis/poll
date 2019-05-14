@@ -6,11 +6,11 @@ from django.http import Http404
 
 
 def detail(request, questionId):
-    try:
+    # try:
         # question = Question.objects.get(pk=questionId)
-        question = get_object_or_404(Question, pk=questionId)
-    except Question.DoesNotExist:
-        raise Http404("Question does not exists")
+    question = get_object_or_404(Question, pk=questionId)
+    # except Question.DoesNotExist:
+    #     raise Http404("Question does not exists")
     return render(request, 'polls/detail.html', {'question' : question})
 
 def results(request, questionId):
