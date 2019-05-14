@@ -16,8 +16,9 @@ def vote(request, questionId):
 
 def index(request):
     latestQuetionList = Question.objects.order_by('pubDate')[:5]
-    template = loader.get_template('polls/index.html')
+    # template = loader.get_template('polls/index.html')
     context = {
         'latestQuestionList': latestQuetionList
     }
-    return  HttpResponse(template.render(context, request))
+    # return  HttpResponse(template.render(context, request))
+    return  render(request, 'polls/index.html', context)
