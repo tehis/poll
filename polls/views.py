@@ -36,7 +36,7 @@ def vote(request, questionId) :
         })
     else:
         # selectedchoice.votes += 1
-        selectedchoice.votes = F('vote') + 1
+        selectedchoice.votes = F('votes') + 1
         selectedchoice.save()
         return HttpResponseRedirect(reverse('polls:results',
                                              args = (question.id, )))
